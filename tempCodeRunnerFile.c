@@ -1,1 +1,0 @@
-printf("%zu bytes\n", sizeof(d));
