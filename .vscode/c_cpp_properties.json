@@ -3,11 +3,15 @@
         {
             "name": "Linux",
             "includePath": [
-                "${default}"
+                "${default}",
+                "/usr/local/lib/wx/include/gtk3-unicode-3.1",
+                "/usr/include"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang",
-            "intelliSenseMode": "linux-clang-x64"
+            "compilerPath": "/usr/bin/gcc",
+            "intelliSenseMode": "linux-gcc-x64",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17"
         }
     ],
     "version": 4
