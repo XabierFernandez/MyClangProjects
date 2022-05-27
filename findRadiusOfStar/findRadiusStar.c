@@ -58,9 +58,7 @@ void printStars(struct star mystars[], int N) {
 
 int readStars(struct star * mystars){
     int numStar, numFields;
-    char *nameStar, *token;     
-    int temperature;
-    double luminosity;
+    char *token;     
     FILE *ifile;
     char line [1024];
 
@@ -103,37 +101,46 @@ int readStars(struct star * mystars){
 
 }
 
-void computeRadii(struct star *mystars, int N) {
+void computeRadii(struct star * mystars, int N) {
     int i;
+    double ts=3500.0;
+    double firstTerm;
+    double secondTerm;
+
     
     for(i=0;i<N; i++){
-        mystars[N].radius = pow(2, (3500/mystars[N].temperature)) * sqrt(mystars[N].luminosity);
-    }
-    
-
+        firstTerm = ts/ (double)mystars[i].temperature;
+        secondTerm = sqrt(mystars[i].luminosity);
+        if (i==1){
+           printf("firstTerm %lf\n", firstTerm);
+           printf("secondTerm %lf\n", secondTerm);
+           printf("luminosity %lf\n", mystars[i].luminosity); 
+        }
+        mystars[i].radius = (firstTerm * firstTerm) * secondTerm;
+    }   
 }
 
 void classifyStars(struct star mystars[], int N) {
     int i;
     
     for(i=0;i<N; i++){
-        if((mystars[N].luminosity>=pow(-2,10) && mystars[N].luminosity<=pow(6,10))
-            || (mystars[N].radius>=0.1 && mystars[N].luminosity<=10)){
-                mystars[N].classification = 'M';
+        if((mystars[i].luminosity>=0.01 && mystars[i].luminosity<=1000000)
+            && (mystars[i].radius>=0.1 && mystars[i].radius<=10)){
+                mystars[i].classification = 'M';
             }
-        else if((mystars[N].luminosity>=pow(3,10) && mystars[N].luminosity<=pow(5,10))
-            || (mystars[N].radius>=10 && mystars[N].luminosity<=100)){
-                mystars[N].classification = 'G';
+        else if((mystars[i].luminosity>=1000 && mystars[i].luminosity<=100000)
+            && (mystars[i].radius>=10 && mystars[i].radius<=100)){
+                mystars[i].classification = 'G';
             }
-        else if((mystars[N].luminosity>=pow(5,10) && mystars[N].luminosity<=pow(6,10))
-            || mystars[N].radius>100){
-                mystars[N].classification = 'S';
+        else if((mystars[i].luminosity>=100000 && mystars[i].luminosity<=1000000)
+            && mystars[i].radius>100){
+                mystars[i].classification = 'S';
             }
-        else if(mystars[N].radius>=0.010 ){
-                mystars[N].classification = 'W';
+        else if(mystars[i].radius<0.010 ){
+                mystars[i].classification = 'W';
             }
         else{
-            mystars[N].classification = 'N';
+            mystars[i].classification = 'N';
         }        
     }
  
