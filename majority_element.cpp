@@ -15,29 +15,33 @@ int count_occurence(vector<int> &a, int left, int right, int num ) {
 }
 
 int get_majority_element_divConq(vector<int> &a, int left, int right) {
-  if (left == right) return -1;
-  if (left + 1 == right) return a[left];
+
+  if (left == right) return a[left];
+  
   //write your code here
   //-----------------------------------------------------------------
-  int mid = left + (right - left) / 2;
+  int mid = left + ((right - left) / 2);
+
 
   int leftMajority = get_majority_element_divConq(a, left, mid);
   int rightMajority = get_majority_element_divConq(a, mid+1, right);
 
-  // if the two halves agree on the majority element, return it.
-  if (leftMajority == rightMajority) {
-      return leftMajority;
-  }
+  if(leftMajority == rightMajority) return leftMajority;
+
+  std::cout << "leftMajority:" << leftMajority << "\n";
+  std::cout << "rightMajority:" << rightMajority << "\n";
 
   // otherwise, count each element and return the "winner".
   int leftCount = count_occurence(a, left, right, leftMajority);
   int rightCount = count_occurence(a, left, right, rightMajority);
+  
+  std::cout << "leftCount:" << leftCount << "\n";
+  std::cout << "rightCount:" << rightCount << "\n";
 
-  if(leftCount > rightCount){
-    return leftMajority;
-  }else{
-    return rightMajority;
-  }
+  // if the two halves agree on the majority element, return it. 
+  int n = ((right - left) + 1)/2;
+  if((leftCount > rightCount) && (leftCount > n))return leftMajority;
+  if((rightCount > leftCount) && (rightCount > n))return rightMajority;
   //-----------------------------------------------------------------
   return -1;
 }
@@ -72,5 +76,5 @@ int main() {
     std::cin >> a[i];
   }
   //std::cout << (get_majority_element_sort(a, 0, a.size()) != -1) << '\n';
-  std::cout << (get_majority_element_divConq(a, 0, a.size()) != -1) << '\n';
+  std::cout << (get_majority_element_divConq(a, 0, a.size()-1) != -1) << '\n';
 }
