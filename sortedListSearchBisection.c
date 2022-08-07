@@ -1,6 +1,6 @@
 #include<stdio.h>
 int main(void) {
-
+    //this is a binary search 
     int list[] = {-10, -3, 2, 5, 8, 14, 77, 106, 759, 900}; /* sorted list */
     int n = 10;
     int item; 
