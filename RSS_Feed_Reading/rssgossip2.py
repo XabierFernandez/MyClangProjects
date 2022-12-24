@@ -61,11 +61,9 @@ for url in (os.environ['RSS_FEED']).split():
             title = item.find('title').text
             link = item.find('link').text            
             if args[0].lower() in title.lower():
-                print("\n===============================================")
-                print("title: %s" % title)
-                
+                #print("%s" % title)                
                 if include_urls:
-                    print("\tlink: %s" % link)
+                    print("\t%s" % link)
         exit(0)
     except Exception as ex:
         """
