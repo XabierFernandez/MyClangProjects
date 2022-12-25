@@ -25,7 +25,9 @@
         {
             "name": "windows",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "${vcpkgRoot}/x64-windows/include",
+                "${vcpkgRoot}/x86-windows/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -34,7 +36,7 @@
             ],
             "windowsSdkVersion": "10.0.19041.0",
             "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
-            "intelliSenseMode": "windows-gcc-x64",
+            "intelliSenseMode": "windows-clang-x64",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17"
         }
